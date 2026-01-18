@@ -1,0 +1,89 @@
+## Sistema de biblioteca
+
+livros = {
+    "O Senhor dos Anéis": "J. R. R. Tolkien",
+    "As Crônicas de Nárnia": "C.S. Lewis",
+    "Viagem ao Centro da Terra": "Julio Verne"
+}
+
+def exibir_biblioteca():
+
+    print("\n" + "="*30)
+    
+    if not livros:
+
+        print("O ESTOQUE ESTÁ VAZIO.")
+
+    else:
+
+        print("ESTOQUE ATUAL")
+
+        for titulo, autor in livros.items():
+
+            print(f" {titulo} - {autor}")
+
+    print("="*30)
+
+while True:
+
+    print("\n" + "="*30)
+    print("    ESTOQUE DA BIBLIOTECA")
+    print("="*30)
+    print("""
+    1. Exibir lista de livros
+    2. Adicionar livro
+    3. Excluir livro
+    4. Sair do sistema
+    """)
+    print("="*30)
+    
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+
+        exibir_biblioteca() 
+        
+        print("Retornando ao menu principal...")
+
+    elif opcao == "2":
+
+        novo_livro = input("Insira o nome do livro: ")
+
+        autor = input("Insira o nome do(a) autor(a): ")
+
+        livros[novo_livro] = autor
+
+        print(f"\n '{novo_livro}' adicionado com sucesso!")
+
+        print("Retornando ao menu principal...")
+
+    elif opcao == "3":
+
+        if not livros:
+
+            print("\n O estoque já está vazio. Nada para excluir.")
+
+        else:
+
+            remover = input("Digite o nome exato do livro para remover: ")
+            
+            if remover in livros:
+
+                del livros[remover]
+
+                print(f"\n '{remover}' foi removido com sucesso!")
+            else:
+                print(f"\n O livro '{remover}' não foi encontrado.")
+
+        print("Retornando ao menu principal...")
+
+    elif opcao == "4":
+
+        print("\nSaindo do sistema...")
+        
+        print("="*30)
+
+        break
+
+    else:
+        print("\n Opção inválida, tente novamente.")
