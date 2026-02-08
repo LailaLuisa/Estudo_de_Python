@@ -1,0 +1,68 @@
+## Calculadora simples (testando chamadas de funções e try/except)
+
+import os
+
+def limpar_tela():
+
+    if os.name == 'nt':
+        
+        os.system('cls')
+
+    else:
+
+        os.system('clear')
+
+def calculadora(n1, n2, operador):
+
+    if operador == "+":
+
+        return n1 + n2
+    
+    elif operador == "-":
+
+        return n1 - n2
+    
+    elif operador == "*":
+
+        return n1 * n2
+    
+    elif operador == "/":
+
+        if n1 == 0 or n2 == 0:
+
+            return "Erro: Divisão por zero não permitida."
+        
+        return n1 / n2
+    else:
+        return "Operador inválido."
+
+while True: 
+
+    try:
+
+        limpar_tela()
+
+        num1 = float(input("Digite o primeiro número: "))
+
+        num2 = float(input("Digite o segundo número: "))
+
+        op = input("Escolha a operação (+, -, *, /): ")
+
+        resultado = calculadora(num1, num2, op)
+
+        print(f"O resultado é: {resultado}")
+
+        decisao = input("Deseja realizar uma nova operação? (Responda com sim ou não): ").lower().strip()
+
+        if decisao != "sim":
+
+            print("Calculadora encerrada.")
+            break
+
+    except ValueError:
+    
+        print("Ops! Você precisa digitar um número válido.")
+          
+        input("Pressione ENTER para tentar novamente...")
+  
+        continue
