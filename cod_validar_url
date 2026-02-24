@@ -1,0 +1,35 @@
+#Validando Sites
+
+import asyncio
+import httpx 
+
+async def verificar_site(cliente, url):
+
+    resposta = await cliente.get(url)
+
+    if resposta.status_code == 200:
+
+        print(f"{resposta.status_code} = O {url} está está operando com sucesso!")
+
+    elif resposta.status_code >= 300 and resposta.status_code < 400:
+
+        print(f"{resposta.status_code} = O {url} foi redirecionado...")
+        
+    else:
+        print(f"O {url} retornou o código {resposta.status_code}")
+
+async def main():
+    sites = [
+        "https://www.google.com",
+        "https://www.github.com",
+        "https://www.python.org",
+        "https://www.nasa.gov"
+    ]
+    
+    async with httpx.AsyncClient() as cliente:
+    
+        tarefa = [asyncio.create_task(verificar_site(cliente, s)) for s in sites]
+
+        await asyncio.gather(*tarefa)
+
+asyncio.run(main())
