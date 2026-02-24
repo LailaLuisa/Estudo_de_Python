@@ -1,0 +1,28 @@
+#Gestão de pedidos
+
+import asyncio
+
+pedidos = [
+        {"pedido": 1, "status": "Na cozinha"},
+        {"pedido": 2, "status": "Na cozinha"}
+]
+
+async def processar_pedido(pedido):
+
+    num = pedido["pedido"]
+
+    print(f"Pedido registrado: {pedido}")
+
+    await asyncio.sleep(2)
+
+    pedido["status"] = "Pronto para entrega"
+
+    print(f"Pedido {num} atualizado para: {pedido["status"]}")
+
+async def main():
+
+    tarefas = [asyncio.create_task(processar_pedido(p))for p in pedidos]
+
+    await asyncio.gather(*tarefas)
+
+asyncio.run(main())
